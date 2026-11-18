@@ -65,3 +65,30 @@ document.getElementById('logout').addEventListener('click',async()=>{
  ++loadId;frame.hidden=true;frame.removeAttribute('srcdoc');
  await client.auth.signOut();status.textContent='Sessione terminata.';
 });
+
+document.getElementById('passwordLogin').addEventListener('click',async()=>{
+ const email=document.getElementById('email').value.trim();
+ const password=document.getElementById('password').value;
+ if(!email || !password){status.textContent='Inserisci email e password.';return;}
+ const button=document.getElementById('passwordLogin');button.disabled=true;status.textContent='Verifica credenziali…';
+ try{
+   const {error}=await client.auth.signInWithPassword({email,password});
+   document.getElementById('password').value='';
+   if(error)status.textContent='Accesso non riuscito. Verifica le credenziali o imposta prima una password tramite accesso email.';
+ }catch{status.textContent='Connessione non disponibile. Riprova.';}
+ finally{button.disabled=false;}
+});
+document.getElementById('setPassword').addEventListener('click',async()=>{
+ const passwordInput=document.getElementById('newPassword');
+ const password=passwordInput.value;
+ if(password.length<12){status.textContent='Usa una password di almeno 12 caratteri.';return;}
+ const button=document.getElementById('setPassword');button.disabled=true;status.textContent='Salvataggio password…';
+ try{
+   const {data:{user},error:verifyError}=await client.auth.getUser();
+   if(verifyError || !user || user.id!==OWNER_UID){status.textContent='Accesso non autorizzato.';return;}
+   const {error}=await client.auth.updateUser({password});
+   passwordInput.value='';
+   status.textContent=error?('Impossibile salvare la password ('+(error.code||'errore_auth')+').'):'Password salvata. Ai prossimi accessi potrai usare email e password.';
+ }catch{status.textContent='Connessione non disponibile. Riprova.';}
+ finally{button.disabled=false;}
+});
