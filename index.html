@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'unsafe-inline'; connect-src https://tigjhpjodvryosazwmqh.supabase.co; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<title>Garmin Marathon Coach — Accesso</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,sans-serif}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0b1422;color:#e9f1fa}.panel{box-sizing:border-box;width:min(440px,calc(100vw - 32px));background:#14243a;border:1px solid #29405b;border-radius:18px;padding:32px}h1{font-size:1.65rem;margin:0 0 8px}p{color:#b8c8d9;line-height:1.5}label{display:block;margin:22px 0 8px}input,button{box-sizing:border-box;width:100%;font:inherit;padding:13px;border-radius:9px}input{background:#0b1422;color:white;border:1px solid #59718b}button{background:#5bb7e8;color:#071522;border:0;margin-top:14px;font-weight:700;cursor:pointer}button:disabled{opacity:.55;cursor:wait}button.secondary{background:transparent;color:#d9e9fa;border:1px solid #59718b}.note{font-size:.9rem}#status{min-height:1.5em} [hidden]{display:none!important}
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.95.0/dist/umd/supabase.min.js"></script>
+<script defer src="./app.js"></script>
+</head>
+<body><main class="panel">
+<h1>Garmin Marathon Coach</h1>
+<p>Accesso personale al cruscotto di allenamento.</p>
+<section id="login"><form id="loginForm"><label for="email">Indirizzo email autorizzato</label><input id="email" type="email" autocomplete="email" required maxlength="254"><button id="send" type="submit">Invia link di accesso</button></form><p class="note">Riceverai un link monouso nella tua casella email.</p></section>
+<section id="signedIn" hidden><p>Autenticazione riuscita.</p><p class="note">Il cruscotto Garmin non è ancora collegato: i dati rimangono privati e non sono pubblicati su questa pagina.</p><button id="logout" class="secondary" type="button">Esci</button></section>
+<p id="status" role="status" aria-live="polite"></p>
+</main></body></html>
