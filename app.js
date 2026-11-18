@@ -56,7 +56,7 @@ document.getElementById('loginForm').addEventListener('submit',async(event)=>{
  const email=document.getElementById('email').value.trim();
  try{
    const {error}=await client.auth.signInWithOtp({email,options:{shouldCreateUser:false,emailRedirectTo:'https://leddone.github.io/garmin-marathon-dashboard/'}});
-   status.textContent=error?'Invio non riuscito. Controlla l’indirizzo e riprova.':'Se l’indirizzo è autorizzato, riceverai un link di accesso.';
+   status.textContent=error?('Invio non riuscito ('+(error.code || 'errore_auth')+', HTTP '+(error.status || 'n/d')+'). Riprova più tardi se è un limite temporaneo.'):'Se l’indirizzo è autorizzato, riceverai un link di accesso.';
  }catch{status.textContent='Connessione non disponibile. Riprova.';}
  finally{send.disabled=false;}
 });
